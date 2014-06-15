@@ -1,13 +1,3 @@
-pollutantmean <- function(directory, pollutant, id = 1:332) {
-    ## 'directory' is a character vector of length 1 indicating
-    ## the location of the CSV files
-    # load the secified files into a dataframe
-    
-    frame <- loadFrame(directory,id)
-    vpol <-frame[pollutant]
-    mean(vpol[!is.na(vpol)])
-          
-}
 loadFrame <- function(d,items)
 {
     # get a list of the files in the directory
@@ -56,18 +46,4 @@ complete <- function(directory, id = 1:332) {
     colnames(result) <- c("id","nobs")
     result
     
-}
-corr <- function(directory, threshold = 0) {
-    ## 'directory' is a character vector of length 1 indicating
-    ## the location of the CSV files
-    allItems <- complete(directory, 500)
-    gtThreshold <- subset(allItems, nobs >= threshold)
-    ## 'threshold' is a numeric vector of length 1 indicating the
-    ## number of completely observed observations (on all
-    ## variables) required to compute the correlation between
-    ## nitrate and sulfate; the default is 0
-    filteredId <- gtThreshold[,c("id")]
-    ## Return a numeric vector of correlations
-    loadFrame(directory,filteredId)
-    #allItems
 }
